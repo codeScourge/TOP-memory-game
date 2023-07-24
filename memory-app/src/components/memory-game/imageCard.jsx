@@ -1,37 +1,28 @@
-import React, { useEffect, useState } from "react";
-import ScoreBoard from "./scoreBoard";
+import React from "react";
+import { useState, useEffect } from "react";
 
-export default function ImageCard({keyId, number, addScore, resetScore, addRound, rounds}) {
-    const [clicked, setClicked] = useState(false);
+export default function ImageCard({incrementScore, resetScore, index, rounds}) {
+    const [clicked, setClicked] = useState(0);
 
-    // reset state when new round is started
     useEffect(() => {
-        setClicked(false)
-        console.log("resetting clicked state")
-    }, [rounds]);
+        setClicked(0);
+    }, [rounds])
 
-    function whenClicked() {
-        if (clicked == true) {
-            console.log("wrong");
+    function click() {
+        if (clicked == 0) {
+            console.log("correct")
 
+            incrementScore();
+            setClicked(1);
+        }   else {
+            console.log("wrong")
             resetScore();
-            addRound();
-        }  else {
-            console.log("correct");
-
-            setClicked(true);
-            addScore();
-            };
-        };
-
-    return  <img src={"/" + number + ".webp"} onClick={whenClicked} key={keyId} className="wrapper__images__img"/>
+        }
     }
 
-
-
-//function fetchImage () {
-//    fetch("https://api.giphy.com/v1/gifs/random?api_key=YRxEtAWXjAKjTRibDWYgeAQ0xRLbz3Wi&tag=cat", {mode:"cors"})  //return promise to fetch data
-//                                            .then((response => {return response.json()}))   // returns a promise to convert data into json
-//                                            .then((json) => {setSource(json.data.images.original_still.url)})
-//}
-
+    return      <li
+                    onClick={click}
+                    key={index}>
+                    {index}
+                </li>
+}
