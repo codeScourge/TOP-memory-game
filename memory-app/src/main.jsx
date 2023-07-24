@@ -7,3 +7,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Application></Application>
   </React.StrictMode>,
 )
+
+
+// current issues
+  // unique keys
+  // shuffling
+  // score nout updating

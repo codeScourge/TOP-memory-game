@@ -3,41 +3,64 @@ import ImageCard from "./components/memory-game/imageCard";
 import MyButton from "./components/common/button";
 import ScoreBoard from "./components/memory-game/scoreBoard";
 import arrayShuffle from 'array-shuffle';
+import uuid from 'react-uuid';
 
 export default function Application() {
     const [imageArray, setImageArray] = useState([]);
     const [currentScore, setCurrentScore] = useState(0);
-    const [currentHighscore, setCurrentHighscore] = useState(0);
+    const [highScore, setHighScore] = useState(0);
+    const [rounds, setRounds] = useState(0);
 
+    const nImages = 4;
 
-    // number of images
+    function addScore() {
+        setCurrentScore(currentScore + 1);
+    };
+
+    function resetScore() {
+        setCurrentScore(0);
+    };
+
+    function addRound() {
+        setRounds(rounds + 1);
+    };
+
+    // on first render create components, shuffle on the ones after
     useEffect(() => {
-        let imgsArray = [];
-        for (let i = 0; i < 2; i++) {
-            imgsArray.push(
-                            <ImageCard
-                                currentScore={currentScore}
-                                setCurrentScore={setCurrentScore}
-                                highScore={currentHighscore}
-                                setHighScore={setCurrentHighscore}
-                                keyId={i}>
-                            </ImageCard>
-                        )
+        if (imageArray != 0) {
+            setImageArray(arrayShuffle([...imageArray]));
         }
-        setImageArray(imgsArray);
-    }, [])
+        else {
+            let imgsArray = [];
+            for (let i = 1; i <= nImages; i++) {
+                const newKey = uuid();
+                imgsArray.push(
+                    <ImageCard
+                        keyId={newKey}
+                        number={i}
+                        addScore={addScore}
+                        resetScore={resetScore}
+                        addRound={addRound}
+                        rounds={rounds}>
+                    </ImageCard>
+                )
+            }
 
-    // shuffle images every time score changes
-    useEffect(() => {
-        //setImageArray()
-        console.log(arrayShuffle([...imageArray]))
+            setImageArray(imgsArray);
+        }
 
+
+        // update highscore
         if (currentScore > highScore) {
-            setHighScore(currentScore + 1)
+            setHighScore(currentScore)
+
+            if (currentScore == nImages) {
+                console.log("You won!");
+                setRounds(rounds + 1);
+            }
         };
     }, [currentScore])
 
-    console.log(imageArray);
 
     return  <div className="wrapper">
                 <ul className="wrapper__images">
@@ -51,7 +74,7 @@ export default function Application() {
 
                 <ScoreBoard
                     currentScore={currentScore}
-                    highScore={currentHighscore}>
+                    highScore={highScore}>
                 </ScoreBoard>
             </div>
 }

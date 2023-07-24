@@ -1,37 +1,37 @@
 import React, { useEffect, useState } from "react";
+import ScoreBoard from "./scoreBoard";
 
-export default function ImageCard({currentScore, setCurrentScore, highScore, setHighScore, keyId}) {
+export default function ImageCard({keyId, number, addScore, resetScore, addRound, rounds}) {
     const [clicked, setClicked] = useState(false);
-    const [source, setSource] = useState(false);
 
-    function fetchImage () {
-        fetch("https://api.giphy.com/v1/gifs/random?api_key=YRxEtAWXjAKjTRibDWYgeAQ0xRLbz3Wi&tag=cat", {mode:"cors"})  //return promise to fetch data
-                                                .then((response => {return response.json()}))   // returns a promise to convert data into json
-                                                .then((json) => {setSource(json.data.images.original_still.url)})
-    }
+    // reset state when new round is started
+    useEffect(() => {
+        setClicked(false)
+        console.log("resetting clicked state")
+    }, [rounds]);
 
-    function onClick() {
-        if (clicked) {
+    function whenClicked() {
+        if (clicked == true) {
             console.log("wrong");
 
-            setCurrentScore(0);
+            resetScore();
+            addRound();
         }  else {
             console.log("correct");
 
             setClicked(true);
-            setCurrentScore(currentScore + 1);
-            }
-        }
+            addScore();
+            };
+        };
 
-    // fetch new image on mount
-    useEffect(() => {
-        fetchImage();
-        console.log(keyId + " is being mounted")
-    }, [])
-
-
-    return  <img src={source} onClick={onClick} key={keyId} className="wrapper__images__img"/>
+    return  <img src={"/" + number + ".webp"} onClick={whenClicked} key={keyId} className="wrapper__images__img"/>
     }
 
 
+
+//function fetchImage () {
+//    fetch("https://api.giphy.com/v1/gifs/random?api_key=YRxEtAWXjAKjTRibDWYgeAQ0xRLbz3Wi&tag=cat", {mode:"cors"})  //return promise to fetch data
+//                                            .then((response => {return response.json()}))   // returns a promise to convert data into json
+//                                            .then((json) => {setSource(json.data.images.original_still.url)})
+//}
 
