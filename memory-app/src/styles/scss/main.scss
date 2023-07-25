@@ -1,0 +1,66 @@
+@import "components";
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $MY_BLACK;
+
+    //background-image: url("/bg.webp");
+    //background-repeat: no-repeat;
+
+    //background-size: cover;
+    //background-position: center;
+}
+
+.scoreboard {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+
+.wrapper {
+    background-color: $MY_GREY;
+    border-radius: 15px;
+
+    padding: 1rem;
+
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    gap: 2rem;
+
+    &__cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+
+        &__card {
+            cursor: pointer;
+
+            width: 4rem;
+            height: 4rem;
+
+            object-fit: cover;
+        }
+    }
+
+    &__reset {
+        @include button();
+    }
+}

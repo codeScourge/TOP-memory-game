@@ -1,0 +1,34 @@
+$MY_GREY: #3D3A50;
+$MY_BLACK: #1A1C22;
+$MY_BLUE: #580EF6;
+$MY_WHITE: #F7F7F7;
+
+@mixin clickable() {
+    transition: all 0.15s ease;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &:active {
+        transform: translateY(5px);
+    }
+}
+
+
+@mixin button() {
+    @include clickable();
+
+    background-color: $MY_BLUE;
+
+    border-radius: 25px;
+    border: none;
+
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding: 0.25rem;
+
+    color: $MY_WHITE;
+    font-weight: 700;
+}
