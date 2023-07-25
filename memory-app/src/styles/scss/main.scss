@@ -41,10 +41,19 @@ body {
         flex-flow: column;
         align-items: center;
         padding: 1rem;
+
+        &__title {
+            color: $MY_WHITE;
+        }
+
+        &__score {
+            color: $MY_WHITE;
+        }
     }
 
     &__logo {
         padding: 1rem;
+        color: $MY_WHITE;
     }
 }
 

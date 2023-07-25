@@ -3,7 +3,7 @@ import ImageCard from "./components/memory-game/imageCard";
 import ScoreBoard from "./components/memory-game/scoreBoard";
 import arrayShuffle from 'array-shuffle';
 
-const maxImages = 6;    // current amount of uploaded monster images in public folder
+const maxImages = 9;    // current amount of uploaded monster images in public folder
 
 export default function Application() {
     const [score, setScore] = useState(0);
