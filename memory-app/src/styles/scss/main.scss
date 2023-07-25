@@ -24,12 +24,28 @@ body {
 
 .scoreboard {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: 0rem;
+    left: 0rem;
+
+    width: 100vw;
+    background-color: $MY_GREY;
 
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
+
+    justify-content: space-between;
     align-items: center;
+
+    &__wrapper {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    &__logo {
+        padding: 1rem;
+    }
 }
 
 
